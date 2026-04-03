@@ -1,7 +1,6 @@
 
 from freqtrade.strategy import IStrategy
 from pandas import DataFrame
-import pandas as pd
 
 class Strategy1(IStrategy):
     INTERFACE_VERSION = 3
@@ -27,7 +26,6 @@ class Strategy1(IStrategy):
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        # Выход ровно через 48 часов (2 свечи на 1d)
         dataframe['exit_long'] = 0
         dataframe['exit_short'] = dataframe['enter_short'].shift(2).fillna(0).astype(int)
         return dataframe

@@ -1,6 +1,6 @@
 from freqtrade.strategy import IStrategy
 from pandas import DataFrame
-import pandas as pd
+import pandas_ta as pta   # <-- самый надёжный способ в Freqtrade 2026.x
 
 class Strategy2(IStrategy):
     INTERFACE_VERSION = 3
@@ -14,7 +14,7 @@ class Strategy2(IStrategy):
     exit_profit_only = False
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        dataframe['rsi'] = pd.TaLib.RSI(dataframe['close'], timeperiod=14)
+        dataframe['rsi'] = pta.rsi(dataframe['close'], length=14)
         return dataframe
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -23,7 +23,7 @@ class Strategy2(IStrategy):
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        # Выход ровно через 48 часов (2 свечи)
+        # Выход ровно через 48 часов = 2 свечи на таймфрейме 1d
         dataframe['exit_long'] = dataframe['enter_long'].shift(2).fillna(0).astype(int)
         dataframe['exit_short'] = dataframe['enter_short'].shift(2).fillna(0).astype(int)
         return dataframe
