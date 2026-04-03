@@ -1,0 +1,28 @@
+{
+  "max_open_trades": 1,
+  "stake_currency": "USDT",
+  "stake_amount": "unlimited",
+  "tradable_balance_ratio": 0.99,
+  "dry_run": true,
+  "dry_run_wallet": 1000,
+  "trading_mode": "futures",
+  "margin_mode": "isolated",
+  "timeframe": "1d",
+  "timerange": "20230101-20251231",
+  "exchange": {
+      "name": "kraken",
+      "key": "",
+      "secret": "",
+      "ccxt_config": {
+          "enableRateLimit": true
+      },
+      "pair_whitelist": ["ETH/USDT:USDT"],
+      "pair_blacklist": []
+  },
+  "strategy": "Strategy2",
+  "minimal_roi": {"0": 0.0},
+  "stoploss": -1.0,
+  "trailing_stop": false,
+  "use_exit_signal": true,
+  "exit_profit_only": false
+}
